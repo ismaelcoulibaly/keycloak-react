@@ -3,14 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@patternfly/react-core": "^4.224.1",
+    "@react-keycloak/web": "^3.4.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1",
-    "keycloak-js": "4.0.0-beta.2",
-    "react-router-dom": "^4.2.2"
+    "@types/react-router-dom": "5.3.3",
+    "keycloak-js": "^19.0.1",
+    "react": "^18.2.0",
+    "react-dom": "^16.2.0",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "3.4",
+    "typescript": "^4.7.4",
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
