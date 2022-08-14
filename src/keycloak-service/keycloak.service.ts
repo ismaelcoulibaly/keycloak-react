@@ -18,29 +18,29 @@ import  KeycloakLoginOptions  from "keycloak-js";
 import Keycloak from "keycloak-js";
 
 declare const baseUrl: string;
-export type KeycloakClient = Keycloak.KeycloakInstance;
-const _kc = new Keycloak('/keycloak.json');
+//export type KeycloakClient = Keycloak;
+// const _kc = new Keycloak('/keycloak.json');
 
 export class KeycloakService {
-    private keycloakAuth: KeycloakClient;
+    private keycloakAuth: Keycloak;
 
-    public constructor(keycloak: KeycloakClient) {
+    public constructor(keycloak: Keycloak) {
         this.keycloakAuth = keycloak;
     }
-    public initKeycloak = (onAuthenticatedCallback: () => void) => {
-        _kc.init({
-            onLoad: 'check-sso',
-            silentCheckSsoRedirectUri: window.location.origin + '/silent-check-sso.html',
-            pkceMethod: 'S256',
-        })
-            .then((authenticated) => {
-                if (!authenticated) {
-                    console.log("user is not authenticated..!");
-                }
-                onAuthenticatedCallback();
-            })
-            .catch(console.error);
-    };
+    // public initKeycloak = (onAuthenticatedCallback: () => void) => {
+    //     _kc.init({
+    //         onLoad: 'check-sso',
+    //         silentCheckSsoRedirectUri: window.location.origin + '/silent-check-sso.html',
+    //         pkceMethod: 'S256',
+    //     })
+    //         .then((authenticated) => {
+    //             if (!authenticated) {
+    //                 console.log("user is not authenticated..!");
+    //             }
+    //             onAuthenticatedCallback();
+    //         })
+    //         .catch(console.error);
+    // };
 
     public authenticated(): boolean {
         return this.keycloakAuth.authenticated ? this.keycloakAuth.authenticated : false;
@@ -68,6 +68,7 @@ export class KeycloakService {
 
     public authServerUrl(): string | undefined {
         const authServerUrl = this.keycloakAuth.authServerUrl;
+        console.log(this.keycloakAuth)
         console.log(authServerUrl)
         return authServerUrl!.charAt(authServerUrl!.length - 1) === '/' ? authServerUrl : authServerUrl + '/';
     }

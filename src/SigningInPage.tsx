@@ -53,7 +53,7 @@ import { AccountServiceContext } from "./account-service/AccountClientContext";
 import { KeycloakContext } from "./keycloak-service/KeycloakContext";
 import KeycloakService from "keycloak-js";
 import { css } from "@patternfly/react-styles";
-
+import keycloak from "./keycloak";
 
 
 interface PasswordDetails {
@@ -117,7 +117,7 @@ class SigningInPage extends React.Component<
         context: React.ContextType<typeof AccountServiceContext>
     ) {
         super(props);
-        console.log(this.context)
+        
         this.context = context;
 
         this.state = {

@@ -1,0 +1,20 @@
+
+Atypescript:S1128"%Remove this unused import of 'Alert'.(ê¥É
+Jtypescript:S1128".Remove this unused import of 'DataListAction'.(ş¬Ä
+Gtypescript:S1128%"+Remove this unused import of 'PageSection'.(­‚¿
+Ttypescript:S1128&"3Remove this unused import of 'PageSectionVariants'.(®™ãƒøÿÿÿÿ
+:typescript:S125*"Remove this commented out code.(ˆĞûÎ
+Utypescript:S1128-"4Remove this unused import of 'AccountServiceClient'.(É‹²Çıÿÿÿÿ
+?typescript:S1250"Remove this commented out code.(ŠãÉùÿÿÿÿ
+?typescript:S11287"#Remove this unused import of 'css'.(¡òÙ¤
+’typescript:S1172”"iRemove the unused function parameter "userLabel" or rename it to "_userLabel" to make intention explicit.(“¥õ‡üÿÿÿÿ8¶»ì¤©0
+Gtypescript:S125—"Remove this commented out code.(ê¢åûÿÿÿÿ8·»ì¤©0
+…typescript:S1172³"aRemove the unused function parameter "index" or rename it to "_index" to make intention explicit.(‰ãª¥8·»ì¤©0
+‹typescript:S1172´"iRemove the unused function parameter "typeArray" or rename it to "_typeArray" to make intention explicit.(¬˜²¯ùÿÿÿÿ
+[typescript:S1854Ò"9Remove this useless assignment to variable "displayName".(ºÿ±Àøÿÿÿÿ
+@typescript:S125Õ"Remove this commented out code.(”ŠòĞıÿÿÿÿ
+Xtypescript:S1854ö"6Remove this useless assignment to variable "maxWidth".(«×ºşşÿÿÿÿ
+‰typescript:S1172±"gRemove the unused function parameter "category" or rename it to "_category" to make intention explicit.(÷Ñíıÿÿÿÿ
+@typescript:S125¿"Remove this commented out code.(ç•ÄÂÿÿÿÿÿ
+Itypescript:S1125Ğ"'Remove the unnecessary boolean literal.(Â¸ÎÛùÿÿÿÿ
+8typescript:S1116ª"Unnecessary semicolon.(ôŸìúÿÿÿÿ

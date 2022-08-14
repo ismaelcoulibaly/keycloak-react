@@ -40,17 +40,17 @@ export class App extends React.Component<AppProps> {
   public render(): React.ReactNode {
 
 
-    // check login
-    if (!this.context!.authenticated()) {
-      this.context!.login();
-    }
+    // // check login
+    // if (!this.context!.authenticated()) {
+    //   this.context!.login();
+    // }
 
-    const Header = (
-        <PageHeader
-            logo={<a id="brandLink" href={brandUrl}><Brand src={brandImg} alt="Logo" className="brand"/></a>}
-            showNavToggle
-        />
-    );
+    // const Header = (
+    //     <PageHeader
+    //         logo={<a id="brandLink" href={brandUrl}><Brand src={brandImg} alt="Logo" className="brand"/></a>}
+    //         showNavToggle
+    //     />
+    // );
 
     // const Sidebar = <PageSidebar nav={<PageNav/>} />;
 

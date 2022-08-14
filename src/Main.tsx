@@ -25,28 +25,34 @@ import {ContentItem, ModulePageDef, flattenContent, initGroupAndItemIds, isExpan
 import { KeycloakContext } from './keycloak-service/KeycloakContext';
 import { AccountServiceClient } from './account-service/account.service';
 import { AccountServiceContext } from './account-service/AccountClientContext';
-import Keycloak from "keycloak-js";
-import { KeycloakClient, KeycloakService } from './keycloak-service/keycloak.service';
 
-
+import {  KeycloakService } from './keycloak-service/keycloak.service';
+import keycloak from "./keycloak";
+import { useKeycloak } from '@react-keycloak/web'
+import SigningInPage from './SigningInPage';
 //declare const keycloak: Keycloak;
 
-declare const features: { [key: string]: boolean; };
+
 
 export interface MainProps {}
-export class Main extends React.Component<MainProps> {
-    public constructor(props: MainProps, keycloak: Keycloak) {
-        super(props);
-        this.keycloak = keycloak;
-    }
 
-    public render(): React.ReactNode {
-        const keycloakService = new KeycloakService(this.keycloak);
+
+export default class Main extends React.Component<MainProps> {
+    public constructor(props: MainProps) {
+        super(props);
+        
+    }
+    
+
+
+    render(): React.ReactNode {
+        console.log(keycloak)
+        const keycloakService = new KeycloakService(keycloak);
         return (
             <HashRouter>
                 <KeycloakContext.Provider value={keycloakService}>
                     <AccountServiceContext.Provider value={new AccountServiceClient(keycloakService)}>
-                        <App/>
+                        <SigningInPage/>
                     </AccountServiceContext.Provider>
                 </KeycloakContext.Provider>
             </HashRouter>
