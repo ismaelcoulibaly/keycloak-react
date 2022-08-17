@@ -35,7 +35,7 @@ import {
     DropdownPosition,
     KebabToggle,
     PageSection,
-    PageSectionVariants
+    PageSectionVariants, Stack
 } from "@patternfly/react-core";
 
 import { AIACommand } from "./AIACommand";
@@ -51,9 +51,10 @@ import { AccountServiceContext } from "./account-service/AccountClientContext";
 // import { ContentPage } from "../ContentPage";
 // import { ContentAlert } from "../ContentAlert";
 import { KeycloakContext } from "./keycloak-service/KeycloakContext";
-import KeycloakService from "keycloak-js";
+import {KeycloakService} from "./keycloak-service/keycloak.service";
 import { css } from "@patternfly/react-styles";
 import keycloak from "./keycloak";
+import {ContentPage} from "./ContentPage";
 
 
 interface PasswordDetails {
@@ -117,7 +118,7 @@ class SigningInPage extends React.Component<
         context: React.ContextType<typeof AccountServiceContext>
     ) {
         super(props);
-        
+
         this.context = context;
 
         this.state = {
@@ -161,42 +162,69 @@ class SigningInPage extends React.Component<
         return `${credType}-${item}-${credId.substring(0, 8)}`;
     }
 
+    public render() :React.ReactNode{
+
+        return(
+            <ContentPage title="categories">
+                <Stack>{this.renderCategories()}</Stack>
+            </ContentPage>
+            );
+
+    }
+
+    private renderCategories(): React.ReactNode {
+        return Array.from(this.state.credentialContainers.keys()).map(
+            (category) => (
+                <PageSection key={category} variant={PageSectionVariants.light}>
+                    <Title
+                        id={`${category}-categ-title`}
+                        headingLevel="h2"
+                        size="xl"
+                    >
+
+                    </Title>
+                    {this.renderTypes(category!)}
+                </PageSection>
+            )
+        )
+    }
 
 
-    // private renderTypes(category: CredCategory): React.ReactNode {
-    //     let credTypeMap: CredTypeMap = this.state.credentialContainers.get(
-    //         category
-    //     )!;
-    //
-    //     return (
-    //         <KeycloakContext.Consumer>
-    //             {(keycloak) => (
-    //                 <>
-    //                     {Array.from(
-    //                         credTypeMap.keys()
-    //                     ).map(
-    //                         (
-    //                             credType: CredType,
-    //                             index: number,
-    //                             typeArray: string[]
-    //                         ) => [
-    //                             this.renderCredTypeTitle(
-    //                                 credTypeMap.get(credType)!,
-    //                                 keycloak!,
-    //                                 category
-    //                             ),
-    //                             this.renderUserCredentials(
-    //                                 credTypeMap,
-    //                                 credType,
-    //                                 keycloak!
-    //                             ),
-    //                         ]
-    //                     )}
-    //                 </>
-    //             )}
-    //         </KeycloakContext.Consumer>
-    //     );
-    // }
+
+    private renderTypes(category: CredCategory): React.ReactNode {
+        let credTypeMap: CredTypeMap = this.state.credentialContainers.get(
+            category
+        )!;
+
+        return (
+            <KeycloakContext.Consumer>
+                {(keycloak) => (
+                    <>
+                        {Array.from(
+                            credTypeMap.keys()
+                        ).map(
+                            (
+                                credType: CredType,
+                                index: number,
+                                typeArray: string[]
+                            ) => [
+                                this.renderCredTypeTitle(
+                                    credTypeMap.get(credType)!,
+                                    keycloak!,
+                                    category
+                                ),
+                                this.renderUserCredentials(
+                                    credTypeMap,
+                                    credType,
+                                    keycloak!
+                                ),
+                            ]
+                        )}
+                    </>
+                )}
+            </KeycloakContext.Consumer>
+        );
+    }
 
 
     private renderUserCredentials(
