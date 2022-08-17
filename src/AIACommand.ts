@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import KeycloakService from 'keycloak-js';
+import {KeycloakService} from './keycloak-service/keycloak.service';
 
 /**
  * @author Stan Silvert

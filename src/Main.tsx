@@ -26,89 +26,37 @@ import { KeycloakContext } from './keycloak-service/KeycloakContext';
 import { AccountServiceClient } from './account-service/account.service';
 import { AccountServiceContext } from './account-service/AccountClientContext';
 
-import {  KeycloakService } from './keycloak-service/keycloak.service';
+import KeycloakClient from 'keycloak-js';
 import keycloak from "./keycloak";
 import { useKeycloak } from '@react-keycloak/web'
 import SigningInPage from './SigningInPage';
-//declare const keycloak: Keycloak;
+import Keycloak from "keycloak-js";
+
+export interface MainProps {keycloak: KeycloakClient, authenticated: boolean}
 
 
-
-export interface MainProps {}
-
-
-export default class Main extends React.Component<MainProps> {
+export default class Main extends React.Component<MainProps, any> {
     public constructor(props: MainProps) {
         super(props);
-        
+        this.state = {keycloak: null, authenticated: false};
     }
-    
+
+    componentDidMount() {
+        const keycloak = new Keycloak('http://localhost:3000/keycloak.json');
+        keycloak.init({onLoad: 'login-required'}).then(authenticated => {
+            console.log(authenticated);
+            this.setState({keycloak: keycloak, authentißcated: authenticated})
+        }).catch(() =>{
+            alert('failed to initialize keycloak')
+        });
+    }
 
 
-    render(): React.ReactNode {
-        console.log(keycloak)
-        const keycloakService = new KeycloakService(keycloak);
-        return (
-            <HashRouter>
-                <KeycloakContext.Provider value={keycloakService}>
-                    <AccountServiceContext.Provider value={new AccountServiceClient(keycloakService)}>
-                        <SigningInPage/>
-                    </AccountServiceContext.Provider>
-                </KeycloakContext.Provider>
-            </HashRouter>
-        );
+    render() {
+        console.log(this.state)
+        if(this.state){
+            return  (<App keycloak ={ this.state.keycloak}/>);
+        }else return (<div>unable to authenticate !</div>);
+
     }
 };
-//
-// declare const resourceUrl: string;
-// declare let content: ContentItem[];
-// const e = React.createElement;
-//
-// function removeHidden(items: ContentItem[]): ContentItem[] {
-//     const visible: ContentItem[] = [];
-//
-//     for (let item of items) {
-//         if (item.hidden && eval(item.hidden)) continue;
-//
-//         if (isExpansion(item)) {
-//             visible.push(item);
-//             item.content = removeHidden(item.content);
-//             if (item.content.length === 0) {
-//                 visible.pop(); // remove empty expansion
-//             }
-//         } else {
-//             visible.push(item);
-//         }
-//     }
-//
-//     return visible;
-// }
-//
-// content = removeHidden(content);
-// initGroupAndItemIds();
-//
-// function loadModule(modulePage: ModulePageDef): Promise<ModulePageDef> {
-//     return new Promise ((resolve, reject) => {
-//         console.log('loading: ' + resourceUrl + modulePage.modulePath);
-//         import(resourceUrl + modulePage.modulePath).then( (module: React.Component) => {
-//             modulePage.module = module;
-//             resolve(modulePage);
-//         }).catch((error: Error) => {
-//             console.warn('Unable to load ' + modulePage.label + ' because ' + error.message);
-//             reject(modulePage);
-//         });
-//     });
-// };
-//
-// const moduleLoaders: Promise<ModulePageDef>[] = [];
-// flattenContent(content).forEach((item: ContentItem) => {
-//     if (isModulePageDef(item)) {
-//         moduleLoaders.push(loadModule(item));
-//     }
-// });
-//
-// // load content modules and start
-// Promise.all(moduleLoaders).then(() => {
-//     const domContainer = document.querySelector('#main_react_container');
-//     ReactDOM.render(e(Main), domContainer);
-// });

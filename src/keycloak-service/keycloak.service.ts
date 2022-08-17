@@ -14,11 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import  KeycloakLoginOptions  from "keycloak-js";
+import  {KeycloakLoginOptions } from "../adapters/oidc/js/src/keycloak";
 import Keycloak from "keycloak-js";
 
 declare const baseUrl: string;
-//export type KeycloakClient = Keycloak;
+export type KeycloakClient = Keycloak;
 // const _kc = new Keycloak('/keycloak.json');
 
 export class KeycloakService {

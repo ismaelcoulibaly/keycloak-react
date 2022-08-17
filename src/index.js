@@ -12,7 +12,7 @@ ReactDOM.render(
 
 
 <React.StrictMode>
-    <App />
+    <Main />
   </React.StrictMode>,
   document.getElementById('root')
 );
